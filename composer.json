@@ -1,0 +1,36 @@
+{
+    "name": "mycompany/magento2-layer-navigation-filter",
+    "description": "Magento 2 module that adds stock status filter (In Stock / Out of Stock) to layered navigation",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "MyCompany",
+            "email": "info@mycompany.com"
+        }
+    ],
+    "keywords": [
+        "magento2",
+        "magento",
+        "layered navigation",
+        "stock filter",
+        "inventory filter",
+        "catalog"
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "magento/framework": ">=102.0.0",
+        "magento/module-catalog": ">=103.0.0",
+        "magento/module-catalog-inventory": ">=100.3.0",
+        "magento/module-layered-navigation": ">=100.3.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MyCompany\\LayerNavigationFilter\\": ""
+        }
+    }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Layer\FilterList">
+        <plugin name="mycompany_layer_navigation_filter_add_stock_filter"
+                type="MyCompany\LayerNavigationFilter\Plugin\FilterList"
+                sortOrder="100"/>
+    </type>
+    <type name="Magento\Search\Api\SearchInterface">
+        <plugin name="mycompany_layer_navigation_filter_stock_search_result"
+                type="MyCompany\LayerNavigationFilter\Plugin\SearchResultFilter"
+                sortOrder="10"/>
+    </type>
+</config>
