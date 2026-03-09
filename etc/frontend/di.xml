@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Catalog\Model\Layer\Filter\Item" type="MyCompany\LayerNavigationFilter\Model\Layer\Filter\Item"/>
     <type name="Magento\Catalog\Model\Layer\FilterList">
         <plugin name="mycompany_layer_navigation_filter_add_stock_filter"
                 type="MyCompany\LayerNavigationFilter\Plugin\FilterList"
