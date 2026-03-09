@@ -34,30 +34,30 @@ class Item extends \Magento\Catalog\Model\Layer\Filter\Item
      */
     public function getUrl()
     {
-        if($this->getFilter()->getRequestVar() == "cat"){
+        if ($this->getFilter()->getRequestVar() == 'cat') {
             $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-            $category_url = $objectManager->create('Magento\Catalog\Model\Category')->load($this->getValue())->getUrl();
-            $return = $category_url;
-            $request = $this->_url->getUrl('*/*/*', array('_current'=>true, '_use_rewrite'=>true));
-            if(strpos($request,'?') !== false ){
-                $query_string = substr($request,strpos($request,'?'));
-            }
-            else{
-                $query_string = '';
-            }
-            if(!empty($query_string)){
-                $return .= $query_string;
-            }
-            return $return;
-        }
-        else{
-            $query = array(
-                $this->getFilter()->getRequestVar()=>$this->getValue(),
-                $this->_htmlPagerBlock->getPageVarName() => null // exclude current page from urls
-            );
+            $categoryUrl = $objectManager->create('Magento\Catalog\Model\Category')->load($this->getValue())->getUrl();
+            $queryParams = $this->request->getParams();
 
-            return $this->_url->getUrl('*/*/*', array('_current'=>true, '_use_rewrite'=>true, '_query'=>$query));
+            unset($queryParams[$this->getFilter()->getRequestVar()]);
+            unset($queryParams['id']);
+            unset($queryParams[$this->_htmlPagerBlock->getPageVarName()]);
+
+            if (empty($queryParams)) {
+                return $categoryUrl;
+            }
+
+            $separator = strpos($categoryUrl, '?') === false ? '?' : '&';
+
+            return $categoryUrl . $separator . http_build_query($queryParams);
         }
+
+        $query = array(
+            $this->getFilter()->getRequestVar() => $this->getValue(),
+            $this->_htmlPagerBlock->getPageVarName() => null // exclude current page from urls
+        );
+
+        return $this->_url->getUrl('*/*/*', array('_current'=>true, '_use_rewrite'=>true, '_query'=>$query));
     }
 
 }
